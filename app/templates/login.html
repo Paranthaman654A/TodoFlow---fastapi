@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login | Todo App
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="logo-section">
+
+            <div class="logo-icon">
+                ✓
+            </div>
+
+            <h1>
+                Todo<span>Flow</span>
+            </h1>
+
+            <p>
+                Organize your tasks. Own your time.
+            </p>
+
+        </div>
+
+
+        {% if message %}
+
+            <div class="flash-message {{ message_type }}">
+                {{ message }}
+            </div>
+
+        {% endif %}
+
+
+        <div class="auth-header">
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Login to continue to your tasks
+            </p>
+
+        </div>
+
+
+        <form
+            action="/auth/login"
+            method="POST"
+            class="auth-form"
+        >
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="auth-footer">
+
+            <p>
+                Don't have an account?
+
+                <a href="/register">
+                    Create Account
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

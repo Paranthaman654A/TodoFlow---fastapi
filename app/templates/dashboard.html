@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | Todo App
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <!-- ========================= -->
+    <!-- TOP NAVIGATION -->
+    <!-- ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="logo-icon small">
+                ✓
+            </div>
+
+            <div>
+                <h1>
+                    Todo<span>Flow</span>
+                </h1>
+
+                <p>
+                    Stay focused. Get things done.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="user-section">
+
+            <div class="user-info">
+
+                <span class="user-label">
+                    Welcome
+                </span>
+
+                <strong>
+                    {{ user.username }}
+                </strong>
+
+            </div>
+
+
+            <a
+                href="/auth/logout"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================= -->
+    <!-- DASHBOARD CONTENT -->
+    <!-- ========================= -->
+
+    <main class="dashboard-content">
+
+
+        <!-- ========================= -->
+        <!-- PAGE HEADER -->
+        <!-- ========================= -->
+
+        <section class="dashboard-header">
+
+            <div>
+
+                <p class="section-label">
+                    MY WORKSPACE
+                </p>
+
+                <h2>
+                    My Tasks
+                </h2>
+
+                <p>
+                    Manage your tasks and stay on schedule.
+                </p>
+
+            </div>
+
+
+            <div class="task-counter">
+
+                <span>
+                    {{ total_tasks }}
+                 </span>
+
+                <small>
+                    Total Tasks
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- ADD TASK FORM -->
+        <!-- ========================= -->
+
+        <section class="task-form-card">
+
+            <div class="card-heading">
+
+                <div>
+
+                    <h3>
+                        Create New Task
+                    </h3>
+
+                    <p>
+                        Add something you need to accomplish.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="/tasks/"
+                method="POST"
+                class="task-form"
+                id="taskForm"
+            >
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Task Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="What needs to be done?"
+                        maxlength="200"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Add some details..."
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="due_time">
+                            Due Time
+                        </label>
+
+                        <input
+                            type="datetime-local"
+                            id="due_time"
+                            name="due_time"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="reminder_time">
+                            Reminder
+                        </label>
+
+                        <input
+                            type="datetime-local"
+                            id="reminder_time"
+                            name="reminder_time"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn add-task-btn"
+                >
+                    <span class="btn-icon">+</span>
+                    Add Task
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- TASK LIST -->
+        <!-- ========================= -->
+
+        <section class="tasks-section">
+
+            <div class="tasks-heading">
+
+                <div>
+
+                    <h3>
+                        Your Tasks
+                    </h3>
+
+                    <p>
+                        Everything you need to accomplish.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if tasks %}
+
+                <div class="task-list">
+
+                    {% for task in tasks %}
+
+                        <article
+                            class="task-card {% if task.completed %}completed{% endif %}"
+                            data-task-id="{{ task.id }}"
+                        >
+
+                            <div class="task-main">
+
+                                <!-- CHECKBOX -->
+
+                                <button
+                                    type="button"
+                                    class="complete-btn"
+                                    data-action="complete"
+                                    data-task-id="{{ task.id }}"
+                                    title="Mark task complete"
+                                >
+
+                                    {% if task.completed %}
+                                        ✓
+                                    {% endif %}
+
+                                </button>
+
+
+                                <!-- TASK INFORMATION -->
+
+                                <div class="task-info">
+
+                                    <h4>
+                                        {{ task.title }}
+                                    </h4>
+
+
+                                    {% if task.description %}
+
+                                        <p>
+                                            {{ task.description }}
+                                        </p>
+
+                                    {% endif %}
+
+
+                                    <div class="task-meta">
+
+                                        {% if task.due_time %}
+
+                                            <span
+                                                class="task-time"
+                                                data-due-time="{{ task.due_time.isoformat() }}"
+                                            >
+
+                                                <span>
+                                                    Due:
+                                                </span>
+
+                                                {{ task.due_time.strftime("%d %b %Y, %I:%M %p") }}
+
+                                            </span>
+
+                                        {% endif %}
+
+
+                                        {% if task.reminder_time %}
+
+                                            <span
+                                                class="task-reminder"
+                                                data-reminder-time="{{ task.reminder_time.isoformat() }}"
+                                            >
+
+                                                <span>
+                                                    Reminder:
+                                                </span>
+
+                                                {{ task.reminder_time.strftime("%d %b %Y, %I:%M %p") }}
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TASK ACTIONS -->
+
+                            <div class="task-actions">
+
+                                <button
+                                    type="button"
+                                    class="action-btn edit-btn"
+                                    data-action="edit"
+                                    data-task-id="{{ task.id }}"
+                                    title="Edit task"
+                                >
+                                    ✎
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="action-btn delete-btn"
+                                    data-action="delete"
+                                    data-task-id="{{ task.id }}"
+                                    title="Delete task"
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <!-- EMPTY STATE -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ✓
+                    </div>
+
+                    <h3>
+                        No tasks yet
+                    </h3>
+
+                    <p>
+                        Create your first task and start getting things done.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
