@@ -10,21 +10,11 @@ Users can create an account, securely log in, manage their tasks, set due times 
 
 ## ✨ Features
 
-* 🔐 User registration and login
-* 🔑 Password hashing using bcrypt
-* 👤 User-specific task management
-* ➕ Create new tasks
-* ✏️ Edit existing tasks
-* 🗑️ Delete tasks
-* ✅ Mark tasks as completed or incomplete
-* 📝 Add optional task descriptions
-* ⏰ Set task due times
-* 📱 Responsive design
-* 🗄️ SQLite database
-* 🧩 SQLAlchemy ORM
-* ✔️ Pydantic data validation
-* 🚀 FastAPI backend
-* 🧪 Pytest-based testing structure
+* 🔐 **Authentication & Security** — User registration, login, and bcrypt password hashing.
+* 📝 **Task Management** — Create, edit, delete, and manage tasks with descriptions.
+* ⏰ **Task Scheduling** — Set due times and track task deadlines.
+* 👤**User-Specific Tasks** — Each user manages their own personal tasks.
+* 🚀 **FastAPI & Database** — FastAPI backend with SQLite, SQLAlchemy, Pydantic, and Pytest.
 
 ---
 
@@ -144,7 +134,6 @@ This project was developed to gain practical experience with:
 * Working with JavaScript and browser notifications
 * Structuring a real-world FastAPI project
 * Writing automated tests with Pytest
-* Managing Python dependencies with uv
 * Deploying a FastAPI application
 
 ---
