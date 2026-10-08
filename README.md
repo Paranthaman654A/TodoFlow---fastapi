@@ -120,29 +120,6 @@ Or, after activating the virtual environment:
 ```bash
 uvicorn app.main:app --reload
 ```
-
-The application will be available at:
-
-**http://127.0.0.1:8000**
-
-Open the URL in your browser.
-
----
-
-## 📚 API Documentation
-
-FastAPI automatically provides interactive API documentation.
-
-### Swagger UI
-
-**http://127.0.0.1:8000/docs**
-
-### ReDoc
-
-**http://127.0.0.1:8000/redoc**
-
-These interfaces can be used to explore and test the application's API endpoints.
-
 ---
 
 ## 🎯 Learning Objectives
@@ -174,19 +151,15 @@ This project was developed to gain practical experience with:
 
 ## 🌐 Live Demo
 
-> 🚀 **TodoFlow is live!**
-
 Try the application directly from your browser:
 
 ### 🔗 [Launch TodoFlow →](https://todoflow-fwiu.onrender.com/)
-
-
 
 ---
 
 ## 👨‍💻 Author
 
-**Paranthaman**
+**Paranthaman A**
 
 AI/ML Enthusiast
 
